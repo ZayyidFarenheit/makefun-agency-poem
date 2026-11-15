@@ -41,4 +41,11 @@ const POEM = [
   'Because I opened it.',
 ].join('\n');
 
+// The gate: 1 to 1,000 Unicode code points, at least one not white space.
+// Fail loudly instead of writing an entry the gate would reject.
+const CHARS = [...POEM].length;
+if (CHARS < 1 || CHARS > 1000 || !/\S/.test(POEM)) {
+  throw new Error(`entry.txt must be 1-1000 characters with non-whitespace; got ${CHARS}`);
+}
+
 writeFileSync(join(OUTPUT_DIR, 'entry.txt'), POEM);
